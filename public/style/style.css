@@ -1,0 +1,58 @@
+.mr5{
+	margin-right:5px;
+}
+.ml{
+	margin-left:10px;
+}
+.singinMain{
+	width: 500px;
+	margin: auto;
+
+}
+.rn{
+	border-radius: 0;
+}
+.mn{
+	margin:0;
+}
+.mt20{
+	margin-top: 20px;
+}
+.oh{
+	overflow: hidden;
+}
+.pn{
+	padding:0;
+}
+.ccc{
+	color:#555;
+}
+table{
+	width: 100%;
+}
+.pd15{
+	padding:0 15px;
+}
+th{
+	font-weight: normal;
+}
+.showcase-form textarea .ng-dirty.ng-invalid,
+.showcase-form select .ng-dirty.ng-invalid,
+.showcase-form input.ng-dirty.ng-invalid {
+    border-color: #e9322d;
+    -webkit-box-shadow: 0 0 6px #f8b9b7;
+    -moz-box-shadow: 0 0 6px #f8b9b7;
+    box-shadow: 0 0 6px #f8b9b7;
+}
+#basic_form{
+	width: 490px;
+	height: 100%;
+	margin:50px auto 0;
+}
+.banner{
+	width: 100%;
+	min-height: 130px;
+
+	background: url(http://www.html5jq.com/templets/default/images/bg3.jpg) no-repeat;
+	background-size: 100%;
+}

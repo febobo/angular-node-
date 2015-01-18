@@ -1,0 +1,47 @@
+extends ../layout
+block content
+	.container(ng-app="febobo")
+		form.form-horizontal.showcase-form(role="form" id="basic_form" name="basic_form" novalidate="" ng-controller="signup")
+			.form-group
+				label.col-sm-2.control-label 
+					h3 注册
+			.form-group
+				label.col-sm-2.control-label  邮箱
+				.col-sm-10
+					input.form-control(type="email" name="userEmail" ng-model="vm.user.email" required="" placeholder="输入您的邮箱")
+			.form-group
+				label.col-sm-2.control-label 用户名
+				.col-sm-10
+					input.form-control(type="text" required="" ng-model="vm.user.name" name="userName" ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z]{2,29}$/" placeholder="由字母、数字、下划线组成，以字母开头，3-30个字符")
+			.form-group
+				label.col-sm-2.control-label  密码
+				.col-sm-10
+					input.form-control(type="password" name="userPassword" ng-model="vm.user.password" required="" placeholder="6-20个字符" ng-maxlength="20" ng-minlength="6")
+			.form-group
+				label.col-sm-2.control-label  重复密码
+				.col-sm-10
+					input.form-control(type="password" name="repeatPassword" ng-model="vm.user.repeatPassword" required="" placeholder="重复输入您的密码" ng-maxlength="20" ng-minlength="6" repeat="userPassword")
+			.form-group(ng-show="basic_form.$invalid && basic_form.$dirty && vm.show_error")
+				label.col-sm-2.control-label
+				.col-sm-10
+					.alert.alert-danger(style="margin:0")
+						ul
+							li(ng-show="basic_form.userEmail.$error.required") 邮箱地址不能为空！
+							li(ng-show="basic_form.userEmail.$dirty  && basic_form.userEmail.$error.email") 邮箱地址格式不正确！
+							li(ng-show=" basic_form.userPassword.$error.required") 密码不能为空！
+							li(ng-show="basic_form.userPassword.$dirty  && basic_form.userPassword.$error.maxlength") 密码长度不能大于20个字符！
+							li(ng-show="basic_form.userPassword.$dirty  && basic_form.userPassword.$error.minlength") 密码长度不能小于6个字符！
+							li(ng-show="basic_form.repeatPassword.$dirty  && basic_form.repeatPassword.$error.maxlength") 密码长度不能大于20个字符！
+							li(ng-show="basic_form.repeatPassword.$dirty  && basic_form.repeatPassword.$error.minlength") 密码长度不能小于6个字符！
+							li(ng-show="basic_form.repeatPassword.$dirty  && basic_form.repeatPassword.$error.repeat") 两次输入的密码不一样！
+							li(ng-show="basic_form.userName.$error.required") 用户名不能为空！
+							li(ng-show="basic_form.userName.$dirty  && basic_form.userName.$error.pattern") 用户名格式不正确！
+			.form-group
+				.col-sm-offset-2.col-sm-10
+					button.btn.btn-success(type="submit" ng-click="vm.submit(basic_form,vm.user)" ) 提交
+	script(src="/js/main.js")
+	script(src="/js/service/service.js")
+	script(src="/js/directive/directive.js")
+
+	script(src="/js/controller/user.js")
+	

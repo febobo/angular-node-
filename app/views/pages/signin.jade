@@ -1,0 +1,38 @@
+extends ../layout
+block content
+	.container(ng-app="febobo")
+		form.form-horizontal.showcase-form(role="form" id="basic_form" name="basic_form" novalidate="" ng-controller="signin")
+			.form-group
+				label.col-sm-2.control-label 
+					h3 登陆
+			.form-group
+				label.col-sm-2.control-label 用户名
+				.col-sm-10
+					input.form-control(type="text" required="" ng-model="vm.user.name" name="userName"  placeholder="用户名")
+			.form-group
+				label.col-sm-2.control-label  密码
+				.col-sm-10
+					input.form-control(type="password" name="userPassword" ng-model="vm.user.password" required="" placeholder="密码" )
+			.form-group
+				.checkbox.col-sm-offset-2.col-sm-10
+					label
+						input(type="checkbox")
+						记住密码(30天有效)
+			.form-group(ng-show="basic_form.$invalid && basic_form.$dirty && vm.show_error")
+				label.col-sm-2.control-label
+				.col-sm-10
+					.alert.alert-danger(style="margin:0")
+						ul
+							li(ng-show=" basic_form.userPassword.$error.required") 密码不能为空！
+							li(ng-show="basic_form.userPassword.$dirty  && vm.password.error") 密码输入有误！
+							li(ng-show="basic_form.userName.$error.required") 用户名不能为空！
+							li(ng-show="basic_form.userName.$dirty  && vm.name.error") 用户名不存在！
+			.form-group
+				.col-sm-offset-2.col-sm-10
+					button.btn.btn-success(type="submit" ng-click="vm.submit(basic_form,vm.user)" ) 提交
+	script(src="/js/main.js")
+	script(src="/js/service/service.js")
+	script(src="/js/directive/directive.js")
+
+	script(src="/js/controller/user.js")
+	

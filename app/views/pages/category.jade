@@ -1,0 +1,73 @@
+include ../includes/head
+.row.mn(ng-app="febobo" ng-controller="category")
+	ol.breadcrumb
+		li
+			span.glyphicon.glyphicon-flag 
+			a.ccc.active(href="category") 网站栏目管理
+		li.pull-right
+			span.glyphicon.glyphicon-plus 
+			a.ccc.link(href="#" , data-toggle="modal" , data-target="#tategoryModel") 增加顶级栏目
+	.row.pd15.mn
+		table.table.table-hover
+			tr
+				th(ng-repeat="item in vm.listInfo" width="{{item.width}}") {{item.title}}
+			tr(ng-repeat= "item in vm.category|paging:vm.page.index:vm.page.size")
+				td
+					span(ng-if="!item.$editing") {{item.title}}
+					input.form-control(type="text" ng-model="item.title" ng-if="item.$editing")
+				td {{item.meta | fedata}}
+				td
+					span.label.label-success 运行
+				td
+					span.glyphicon.glyphicon-pencil(ng-if="!item.$editing" ng-click="item.$editing = true")
+					span.glyphicon.glyphicon-floppy-disk(ng-if="item.$editing" ng-click="item.$editing = false")
+				td
+					a(href="#")
+						span.glyphicon.glyphicon-remove
+		hr
+		.row
+			.col-md-10.pull-right
+				pagination.pagination-sm.pull-right(total-items="vm.category|size" ng-model="vm.page.index" max-size="5" items-per-page="vm.page.size" previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" boundary-links="true")
+			//- if category && category.length
+			//- each item in category
+			//- 	tr(class="item-id-#{item._id}")
+			//- 		td 
+			//- 			span #{item.title}
+			//- 		td #{moment(item.meta).format('YYYY-MM-DD HH:mm:ss')}
+			//- 		td
+			//- 			span.label.label-success 运行
+			//- 		td
+			//- 			a(ng-click="vm.updataCategory()" data-toggle="modal" data-target="#tategoryModel" )
+			//- 				span.glyphicon.glyphicon-wrench
+			//- 		td
+			//- 			a(href="#")
+			//- 				span.glyphicon.glyphicon-remove
+	#tategoryModel.modal.fade
+		.modal-dialog
+			.modal-content
+				form.form-horizontal.showcase-form(id="category" name="category" novalidate="")
+					.modal-header 新增顶级栏目
+					.modal-body
+						.form-group.row
+							label.col-sm-2.control-label(for="tategoryTitle") 栏目名称
+							.col-sm-10
+								if category && category.length
+									input#tategoryTitle.form-control(type="text" name="title" ng-model="vm.category.title" required="" value="#{category.title}")
+								else
+									input#tategoryTitle.form-control(type="text" name="title" ng-model="vm.category.title" required="" placeholder="请输入栏目名称")
+						.form-group.row(ng-show="category.$invalid && category.$dirty && vm.show_error")
+							label.col-sm-2.control-label
+							.col-sm-10
+								.alert.alert-danger(style="margin:0")
+									ul
+										li(ng-show="category.title.$error.required") 栏目名称不能为空！
+										li(ng-show="category.title.$dirty  && vm.title.error") 栏目名称已存在！
+					.modal-footer
+						button.btn.btn-default(type="button",data-dismiss = "modal") 关闭
+						button.btn.btn-success(type="submit" ng-click="vm.addcategory(category,vm.category)") 提交
+script(src="./js/main.js")
+script(src="./js/service/service.js")
+script(src="./js/directive/directive.js")
+script(src="./js/filter/filter.js")
+
+script(src="./js/controller/admin.js")
